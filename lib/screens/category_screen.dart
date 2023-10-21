@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:news_api/models/category_model.dart';
+import '../models/category_model.dart';
 import '../view_model/news_model.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -16,7 +16,7 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   final format = DateFormat('MMMM dd,yyyy');
-  NewsModel newsModel = NewsModel();
+  NewsViewModel newsModel = NewsViewModel();
   String categoryName = 'general';
   List<String> categoryList = [
     'General',
@@ -75,8 +75,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
               height: 26,
             ),
             Expanded(
-              child: FutureBuilder<CategoryModel>(
-                future: newsModel.fetchCategories(categoryName),
+              child: FutureBuilder<CategoriesNewsModel>(
+                future: newsModel.fetchCategoriesNewsApi(categoryName),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
